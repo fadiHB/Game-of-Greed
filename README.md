@@ -8,7 +8,7 @@ The Game of Greed, also known as 10,000, is a dice game where each player compet
 **PR link**: https://github.com/fadiHB/Game-of-Greed/pull/2
 
 **the Team member:**
-Abdullah mouazen
-muhammad fadi Hboubati
-Rania abdullah
+Abdullah mouazen</br>
+muhammad fadi Hboubati</br>
+Rania abdullah</br>
 Joudi Awameh

@@ -9,21 +9,44 @@ class Banker:
       self.shelved = 0
 
     def shelf(self,num):
+        '''
+        Will temporarily store unbanked points
+        Argument:
+            num{int} --  is the amount of points (integer) to add to shelf. 
+        output:
+            num{int} -- add the num to the shelved
+        '''
         self.shelved += num
         return self.shelved
 
     def bank(self):
+        """
+        Add any points on the shelf to total and reset shelf    
+        """
         self.balance += self.shelved
         self.clear_shelf()
         return self.balance
 
+
     def clear_shelf(self):
+        '''
+        clear the shelved
+         '''
         self.shelved = 0
 
 class GameLogic:
 
     @staticmethod
     def calculate_score(result_dices):
+
+        '''
+        Returns an integer representing the roll’s score according to rules of game.
+        Arguments:
+            calc {tuple} -- is a tuple of integers that represent a dice roll.
+        Output:
+            Returns the score according to rules of the game
+        '''
+
         score = 0
         count = Counter(result_dices).most_common()
 
@@ -126,6 +149,14 @@ class GameLogic:
 
     @staticmethod
     def roll_dice(number):
+        '''
+        Rolls the dice num times
+        Arguments:
+            num {integer} -- how many times to roll the dice
+        
+        Output:
+            Returns a tuple of length num
+        '''
         my_list = []
         for i in range(number):
             my_list.append(random.randint(0,number))

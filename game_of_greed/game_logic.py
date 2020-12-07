@@ -65,7 +65,7 @@ class GameLogic:
         for i in range(len(count)):
 
             if (count[i][0] == 1):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1:
                     score += 100
                 if count[i][1] == 2:
@@ -80,7 +80,7 @@ class GameLogic:
                     score += 4000
 
             if (count[i][0] == 5):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1:
                     score += 50
                 if count[i][1] == 2:
@@ -95,7 +95,7 @@ class GameLogic:
                     score += 2000
 
             if (count[i][0] == 2):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1 or 2:
                     score += 0
                 if count[i][1] == 3:
@@ -108,7 +108,7 @@ class GameLogic:
                     score += 800
 
             if (count[i][0] == 3):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1 or 2:
                     score += 0
                 if count[i][1] == 3:
@@ -121,7 +121,7 @@ class GameLogic:
                     score += 1200
 
             if (count[i][0] == 4):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1 or 2:
                     score += 0
                 if count[i][1] == 3:
@@ -134,7 +134,7 @@ class GameLogic:
                     score += 1600
 
             if (count[i][0] == 6):
-                print(count[i][0])
+                # print(count[i][0])
                 if count[i][1] == 1 or 2:
                     score += 0
                 if count[i][1] == 3:
@@ -159,7 +159,7 @@ class GameLogic:
         '''
         my_list = []
         for i in range(number):
-            my_list.append(random.randint(0,number))
+            my_list.append(random.randint(1,number))
         return tuple(my_list)
 
 

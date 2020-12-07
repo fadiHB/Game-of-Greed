@@ -6,6 +6,9 @@ The Game of Greed, also known as 10,000, is a dice game where each player compet
 **time estimate** : 3.5 h
 
 **PR link**: https://github.com/fadiHB/Game-of-Greed/pull/2
+
+**time estimate** : 5 h
+
 **PR link**: https://github.com/fadiHB/Game-of-Greed/pull/3
 
 

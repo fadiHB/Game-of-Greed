@@ -159,7 +159,7 @@ class GameLogic:
         '''
         my_list = []
         for i in range(number):
-            my_list.append(random.randint(1,number))
+            my_list.append(random.randint(1,6))
         return tuple(my_list)
 
 

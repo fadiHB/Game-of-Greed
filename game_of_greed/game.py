@@ -1,16 +1,26 @@
 from game_of_greed.game_logic import *
-
+import sys
 
 class Game:
     def __init__(self, roller=None):
         self.roller = roller or GameLogic.roll_dice
         self.round = 1
         self.remaining_dice= 6
+        self.dice=[]
 
-    @staticmethod
-    def input_dice(dice_to_keep):
-        new = (int(i) for i in dice_to_keep)
-        return new
+    # @staticmethod
+    # def input_dice(dice_to_keep):
+
+    #     try:
+    #         newdice = [int(i) for i in dice_to_keep]
+    #         # print(tuple(newdice))
+    #         return tuple(newdice)
+    #     except:
+    #         my_bank = Banker()
+    #         Game.quit_masseg(my_bank.balance)
+    #         sys.exit()
+
+
 
     @staticmethod
     def quit_masseg(score):
@@ -25,7 +35,6 @@ class Game:
 
     def rounds(self):
         roll = self.roller(self.remaining_dice)
-        # print(','.join([str(i) for i in roll]))
         return roll
 
     def zilch_method(self):
@@ -36,24 +45,25 @@ class Game:
         self.remaining_dice = 6
         self.round+=1
 
-    
-    # def check_cheater(self,tup,npt): 
-    #     elem =[]
-
-    #     for i in npt:
-    #         if tuple(tup).count(i) >= tuple(npt).count(i):
-    #             elem.append(i)
-    #     if len(elem) != len(list(npt)):
-    #         return True
-            
-    #     else:
-    #         return False    
      
 
     def play(self):
         score = 0
         my_bank = Banker()
         res = self.welcom()
+          
+        def input_dice(dice_to_keep):
+
+            try:
+                newdice = [int(i) for i in dice_to_keep]
+                # print(tuple(newdice))
+                return tuple(newdice)
+            except:
+                # my_bank = Banker()
+                Game.quit_masseg(my_bank.balance)
+                sys.exit()
+
+
         if res == 'n' or res == 'no':
             print('OK. Maybe another time')
         elif res == 'y' or res == 'yes':
@@ -65,8 +75,7 @@ class Game:
                
                 
 
-                while GameLogic.calculate_score(Game.input_dice(rounds)) == 0 :
-                    # print(' zilch ----1 ')
+                while GameLogic.calculate_score(input_dice(rounds)) == 0 :
                     self.zilch_method()
                     print(f'Starting round {self.round}')
                     print(f'Rolling {self.remaining_dice} dice...')
@@ -81,45 +90,42 @@ class Game:
                     dice_to_keep = input(
                         'Enter dice to keep (no spaces), or (q)uit: ').lower()
 
-                    if GameLogic.calculate_score((Game.input_dice(dice_to_keep)) == 1500 and len(dice_to_keep) == 6 :
-
-                    # inp = Game.input_dice(dice_to_keep)    
-                    # new_roll=self.roller(self.remaining_dice)
-                    # # cheater= self.check_cheater(new_roll,inp)
-                    # # while cheater:
-                    # #     print('Cheater!!! Or possibly made a typo...')
-                    # #     print(','.join([str(i) for i in new_roll]))
-                    # #     break
-                    # flag=True  
-                    # while flag:
-                    #     flag2 = False
-                    #     elem =[]
-                    #     for i in inp:
-                    #         if tuple(new_roll).count(i) >= tuple(inp).count(i):
-                    #             elem.append(i)
-                    #     if len(elem) != len(list(inp)):
-                    #         print('Cheater!!! Or possibly made a typo...')
-                    #         print(','.join([str(i) for i in new_roll]))
-                    #         # dice_to_keep = input(
-                    #         # 'Enter dice to keep (no spaces), or (q)uit: ').lower()
-                    #         # if dice_to_keep == 'q' or dice_to_keep == 'quit':
-                    #         #     Game.quit_masseg(my_bank.balance)
-                    #         flag2 = True
-                    #     flag=False 
+                    inp = input_dice(dice_to_keep) 
                     
-                    # if flag2:
-                    #     print('continue here ...')
-                    #     continue
-                    
-                        
+                    # if dice_to_keep == 'q' or dice_to_keep == 'quit':
+                    #     flag=False  
                        
+                    flag=True  
+                    while flag:
+                        flag2 = False
+                        elem =[]
+                        for i in inp:
+                           
+                            if tuple(rounds).count(i) >= tuple(inp).count(i):
+                                elem.append(i)
+                            
+                        if len(elem) != len(list(inp)):
+                           
+                            print('Cheater!!! Or possibly made a typo...')
+                            if self.dice==[]:
+                                self.dice=rounds
+                            
+                            print(','.join([str(i) for i in self.dice]))
+                           
+
+                            flag2 = True
+                        flag=False 
+
+                    if flag2:
+                        continue
+ 
                     if dice_to_keep == 'q' or dice_to_keep == 'quit':
                         Game.quit_masseg(my_bank.balance)
                         break           
                    
                     else:
                         
-                        result = Game.input_dice(dice_to_keep)
+                        result =input_dice(dice_to_keep)
                         my_bank.shelf(GameLogic.calculate_score(result))
                         self.remaining_dice -= len(dice_to_keep)
                         print(f'You have {my_bank.shelved} unbanked points and {self.remaining_dice} dice remaining')
@@ -131,17 +137,18 @@ class Game:
                         Game.quit_masseg(my_bank.balance)
                         break
                     elif options =='r' or options =='roll':
-                        # while options: 
+                  
                             print(f'Rolling {self.remaining_dice} dice...')
-                            round2 = self.rounds()
-                            print(','.join([str(i) for i in round2]))
+                            # round2 = self.rounds()
+                            self.dice=self.rounds()
+                            print(','.join([str(i) for i in self.dice]))
 
 
 
 
 
-                            while GameLogic.calculate_score(Game.input_dice(round2)) == 0 :
-                                # print(' zilch ----2 ')
+                            while GameLogic.calculate_score(input_dice(self.dice)) == 0 :
+                               
 
                                 self.zilch_method()
                                 print(f'Starting round {self.round}')
@@ -161,7 +168,10 @@ class Game:
                         self.remaining_dice = 6
                         print(f'Starting round {self.round}')
                         print(f'Rolling {self.remaining_dice} dice...')
-                        print(','.join([str(i) for i in self.rounds()]))            
+                        self.dice=self.rounds()
+                        print(','.join([str(i) for i in self.dice]))
+                        
+                                    
 
 
 if __name__ == '__main__':

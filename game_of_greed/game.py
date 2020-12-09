@@ -42,8 +42,9 @@ class Game:
         print('Zilch!!! Round over')
         print(f'You banked 0 points in round {self.round}')
         print(f'Total score is {my_bank.balance} points')
-        self.remaining_dice = 6
+        my_bank.clear_shelf()
         self.round+=1
+        self.remaining_dice = 6
 
      
 
@@ -70,16 +71,21 @@ class Game:
                 print(f'Starting round {self.round}')
                 print(f'Rolling {self.remaining_dice} dice...')
                 rounds = self.rounds()
+                # print(rounds)
+                self.dice=rounds
+                # print(self.dice)
                 print(','.join([str(i) for i in rounds]))
 
                
                 
 
-                while GameLogic.calculate_score(input_dice(rounds)) == 0 :
+                while GameLogic.calculate_score(input_dice(self.dice)) == 0 :
                     self.zilch_method()
                     print(f'Starting round {self.round}')
                     print(f'Rolling {self.remaining_dice} dice...')
-                    print(','.join([str(i) for i in self.rounds()]))
+                    self.dice = self.rounds()
+                    # print("zilch 1")
+                    print(','.join([str(i) for i in self.dice]))
                     break
 
                     
@@ -90,22 +96,19 @@ class Game:
                     dice_to_keep = input(
                         'Enter dice to keep (no spaces), or (q)uit: ').lower()
 
-                    inp = input_dice(dice_to_keep) 
-                    
-                    # if dice_to_keep == 'q' or dice_to_keep == 'quit':
-                    #     flag=False  
-                       
+                    inp = input_dice(dice_to_keep)
+
                     flag=True  
                     while flag:
                         flag2 = False
                         elem =[]
                         for i in inp:
                            
-                            if tuple(rounds).count(i) >= tuple(inp).count(i):
+                            if tuple(self.dice).count(i) >= tuple(inp).count(i):
                                 elem.append(i)
                             
                         if len(elem) != len(list(inp)):
-                           
+                            # print(self.dice)
                             print('Cheater!!! Or possibly made a typo...')
                             if self.dice==[]:
                                 self.dice=rounds
@@ -118,10 +121,21 @@ class Game:
 
                     if flag2:
                         continue
+
+                    
+    
  
                     if dice_to_keep == 'q' or dice_to_keep == 'quit':
                         Game.quit_masseg(my_bank.balance)
-                        break           
+                        break 
+
+
+                    if len(dice_to_keep)==6 and GameLogic.calculate_score(input_dice(dice_to_keep))>=1400:
+                        self.remaining_dice=0
+                        hot = my_bank.shelf(GameLogic.calculate_score(input_dice(dice_to_keep)))
+                        print(f'You have {hot} unbanked points and {self.remaining_dice} dice remaining')                        
+                        self.remaining_dice=6
+
                    
                     else:
                         
@@ -130,8 +144,8 @@ class Game:
                         self.remaining_dice -= len(dice_to_keep)
                         print(f'You have {my_bank.shelved} unbanked points and {self.remaining_dice} dice remaining')
                 
-  
-                    options = input('(r)oll again, (b)ank your points or (q)uit ').lower()
+                    
+                    options = input('(r)oll again, (b)ank your points or (q)uit ').lower()    
 
                     if options == 'q' or options == 'quit':
                         Game.quit_masseg(my_bank.balance)
@@ -149,11 +163,13 @@ class Game:
 
                             while GameLogic.calculate_score(input_dice(self.dice)) == 0 :
                                
-
+                                
                                 self.zilch_method()
                                 print(f'Starting round {self.round}')
                                 print(f'Rolling {self.remaining_dice} dice...')
-                                print(','.join([str(i) for i in self.rounds()]))
+                                self.dice = self.rounds()
+                                # print("zilch 2 ")
+                                print(','.join([str(i) for i in self.dice]))
                                 
                                 break
                             # status=True

@@ -35,6 +35,7 @@ class Banker:
         self.shelved = 0
 
 class GameLogic:
+    hot_dices=0
 
     @staticmethod
     def calculate_score(result_dices):
@@ -52,10 +53,12 @@ class GameLogic:
 
         if (len(count) == 3 and count[0][1] == count[1][1] == count[2][1]):
             score += 1500
+            GameLogic.hot_dices =6
             return score
 
         if (len(count) == 6):
             score += 1500
+            GameLogic.hot_dices =6
             return score
 
         # if (count == [(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1)]):
@@ -63,6 +66,16 @@ class GameLogic:
         #     return score
 
         for i in range(len(count)):
+
+            tester = count[i][0]
+            tester2 = count[i][1]
+            if tester2 > 2 or tester == 1 or tester ==5:
+                # print("hopefully")
+                GameLogic.hot_dices += tester2
+                # print(GameLogic.hot_dices,"mmmmmmmmmmmmmmm")
+            new_tester = tester*100 
+            # print("what am i ?",new_tester)
+
 
             if (count[i][0] == 1):
                 # print(count[i][0])
@@ -164,13 +177,13 @@ class GameLogic:
 
 
 if __name__ == "__main__":
-    pass
 
-    # result_dices = [1, 2, 3, 4, 5, 6]
+    # result_dices = [6,6,6,1,1,1]
     # count = Counter(result_dices).most_common()
-    # print(count)
+    # print("who am i ?",count)
 
     # x = GameLogic.calculate_score(result_dices)
-    # print(x)
+    # print("zzzz",x)
+    pass
 
 
